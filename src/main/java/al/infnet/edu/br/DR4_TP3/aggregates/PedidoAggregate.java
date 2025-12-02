@@ -4,11 +4,13 @@ import al.infnet.edu.br.DR4_TP3.commands.CriarPedidoCommand;
 import al.infnet.edu.br.DR4_TP3.events.PedidoCriadoEvent;
 import al.infnet.edu.br.DR4_TP3.events.PedidoCriadoEvent.ItemPedido;
 import org.axonframework.commandhandling.CommandHandler;
+import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +18,13 @@ import java.util.UUID;
 public class PedidoAggregate {
     @AggregateIdentifier
     private UUID pedidoId;
+    private UUID clienteId;
+    private UUID lojaId;
+    private List<ItemPedido> itens;
+    private BigDecimal valorTotal;
+    private String enderecoEntrega;
+    private String formaPagamento;
+    private String status;
 
     protected PedidoAggregate() {
     }
@@ -43,5 +52,49 @@ public class PedidoAggregate {
                 command.getEnderecoEntrega(),
                 command.getFormaPagamento(),
                 1L));
+    }
+
+    @EventSourcingHandler
+    public void on(PedidoCriadoEvent event) {
+        this.pedidoId = event.getAggregateId();
+        this.clienteId = event.getClienteId();
+        this.lojaId = event.getLojaId();
+        this.itens = new ArrayList<>(event.getItens());
+        this.valorTotal = event.getValorTotal();
+        this.enderecoEntrega = event.getEnderecoEntrega();
+        this.formaPagamento = event.getFormaPagamento();
+        this.status = "CRIADO";
+    }
+
+    public UUID getPedidoId() {
+        return pedidoId;
+    }
+
+    public UUID getClienteId() {
+        return clienteId;
+    }
+
+    public UUID getLojaId() {
+        return lojaId;
+    }
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public BigDecimal getValorTotal() {
+        return valorTotal;
+    }
+
+    public String getEnderecoEntrega() {
+        return enderecoEntrega;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }
