@@ -5,20 +5,19 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "pedidos")
 public class PedidoEntity {
 
     @Id
-    private UUID id;
+    private Long id;
 
     @Column(nullable = false)
-    private UUID clienteId;
+    private Long clienteId;
 
     @Column(nullable = false)
-    private UUID lojaId;
+    private Long lojaId;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedidoEntity> itens = new ArrayList<>();
@@ -38,7 +37,7 @@ public class PedidoEntity {
     public PedidoEntity() {
     }
 
-    public PedidoEntity(UUID id, UUID clienteId, UUID lojaId,
+    public PedidoEntity(Long id, Long clienteId, Long lojaId,
             BigDecimal valorTotal, String enderecoEntrega, String formaPagamento, String status) {
         this.id = id;
         this.clienteId = clienteId;
@@ -49,27 +48,27 @@ public class PedidoEntity {
         this.status = status;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public UUID getClienteId() {
+    public Long getClienteId() {
         return clienteId;
     }
 
-    public void setClienteId(UUID clienteId) {
+    public void setClienteId(Long clienteId) {
         this.clienteId = clienteId;
     }
 
-    public UUID getLojaId() {
+    public Long getLojaId() {
         return lojaId;
     }
 
-    public void setLojaId(UUID lojaId) {
+    public void setLojaId(Long lojaId) {
         this.lojaId = lojaId;
     }
 

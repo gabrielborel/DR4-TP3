@@ -2,16 +2,15 @@ package al.infnet.edu.br.DR4_TP3.commands;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 public class CriarPedidoCommand extends Command {
-    private final UUID clienteId;
-    private final UUID lojaId;
+    private final Long clienteId;
+    private final Long lojaId;
     private final List<ItemPedidoCommand> itens;
     private final String enderecoEntrega;
     private final String formaPagamento;
 
-    public CriarPedidoCommand(UUID pedidoId, UUID clienteId, UUID lojaId,
+    public CriarPedidoCommand(Long pedidoId, Long clienteId, Long lojaId,
             List<ItemPedidoCommand> itens, String enderecoEntrega, String formaPagamento) {
         super(pedidoId, "Pedido");
         this.clienteId = clienteId;
@@ -31,11 +30,11 @@ public class CriarPedidoCommand extends Command {
         return new CriarPedidoData(clienteId, lojaId, itens, enderecoEntrega, formaPagamento);
     }
 
-    public UUID getClienteId() {
+    public Long getClienteId() {
         return clienteId;
     }
 
-    public UUID getLojaId() {
+    public Long getLojaId() {
         return lojaId;
     }
 
@@ -51,10 +50,10 @@ public class CriarPedidoCommand extends Command {
         return formaPagamento;
     }
 
-    public record ItemPedidoCommand(UUID produtoId, String nomeProduto, int quantidade, BigDecimal precoUnitario) {
+    public record ItemPedidoCommand(Long produtoId, String nomeProduto, int quantidade, BigDecimal precoUnitario) {
     }
 
-    public record CriarPedidoData(UUID clienteId, UUID lojaId, List<ItemPedidoCommand> itens,
+    public record CriarPedidoData(Long clienteId, Long lojaId, List<ItemPedidoCommand> itens,
             String enderecoEntrega, String formaPagamento) {
     }
 }

@@ -2,17 +2,16 @@ package al.infnet.edu.br.DR4_TP3.events;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 public class PedidoCriadoEvent extends DomainEvent {
-    private final UUID clienteId;
-    private final UUID lojaId;
+    private final Long clienteId;
+    private final Long lojaId;
     private final List<ItemPedido> itens;
     private final BigDecimal valorTotal;
     private final String enderecoEntrega;
     private final String formaPagamento;
 
-    public PedidoCriadoEvent(UUID pedidoId, UUID clienteId, UUID lojaId,
+    public PedidoCriadoEvent(Long pedidoId, Long clienteId, Long lojaId,
             List<ItemPedido> itens, BigDecimal valorTotal,
             String enderecoEntrega, String formaPagamento, long version) {
         super(pedidoId, "Pedido", version);
@@ -34,11 +33,11 @@ public class PedidoCriadoEvent extends DomainEvent {
         return new PedidoCriadoData(clienteId, lojaId, itens, valorTotal, enderecoEntrega, formaPagamento);
     }
 
-    public UUID getClienteId() {
+    public Long getClienteId() {
         return clienteId;
     }
 
-    public UUID getLojaId() {
+    public Long getLojaId() {
         return lojaId;
     }
 
@@ -58,10 +57,10 @@ public class PedidoCriadoEvent extends DomainEvent {
         return formaPagamento;
     }
 
-    public record ItemPedido(UUID produtoId, String nomeProduto, int quantidade, BigDecimal precoUnitario) {
+    public record ItemPedido(Long produtoId, String nomeProduto, int quantidade, BigDecimal precoUnitario) {
     }
 
-    public record PedidoCriadoData(UUID clienteId, UUID lojaId, List<ItemPedido> itens,
+    public record PedidoCriadoData(Long clienteId, Long lojaId, List<ItemPedido> itens,
             BigDecimal valorTotal, String enderecoEntrega, String formaPagamento) {
     }
 }

@@ -12,14 +12,13 @@ import org.axonframework.spring.stereotype.Aggregate;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Aggregate
 public class PedidoAggregate {
     @AggregateIdentifier
-    private UUID pedidoId;
-    private UUID clienteId;
-    private UUID lojaId;
+    private Long pedidoId;
+    private Long clienteId;
+    private Long lojaId;
     private List<ItemPedido> itens;
     private BigDecimal valorTotal;
     private String enderecoEntrega;
@@ -66,15 +65,15 @@ public class PedidoAggregate {
         this.status = "CRIADO";
     }
 
-    public UUID getPedidoId() {
+    public Long getPedidoId() {
         return pedidoId;
     }
 
-    public UUID getClienteId() {
+    public Long getClienteId() {
         return clienteId;
     }
 
-    public UUID getLojaId() {
+    public Long getLojaId() {
         return lojaId;
     }
 

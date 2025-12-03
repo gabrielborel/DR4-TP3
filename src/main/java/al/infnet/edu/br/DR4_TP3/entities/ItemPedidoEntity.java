@@ -1,20 +1,20 @@
 package al.infnet.edu.br.DR4_TP3.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Entity
 @Table(name = "itens_pedido")
 public class ItemPedidoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
-    private UUID produtoId;
+    private Long produtoId;
 
     @Column(nullable = false)
     private String nomeProduto;
@@ -27,31 +27,32 @@ public class ItemPedidoEntity {
 
     @ManyToOne
     @JoinColumn(name = "pedido_id", nullable = false)
+    @JsonIgnore
     private PedidoEntity pedido;
 
     public ItemPedidoEntity() {
     }
 
-    public ItemPedidoEntity(UUID produtoId, String nomeProduto, int quantidade, BigDecimal precoUnitario) {
+    public ItemPedidoEntity(Long produtoId, String nomeProduto, int quantidade, BigDecimal precoUnitario) {
         this.produtoId = produtoId;
         this.nomeProduto = nomeProduto;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public UUID getProdutoId() {
+    public Long getProdutoId() {
         return produtoId;
     }
 
-    public void setProdutoId(UUID produtoId) {
+    public void setProdutoId(Long produtoId) {
         this.produtoId = produtoId;
     }
 

@@ -5,14 +5,14 @@ import java.util.UUID;
 
 public abstract class Command {
     private final UUID commandId;
-    private final UUID aggregateId;
+    private final Long aggregateId;
     private final String aggregateType;
     private final Instant issuedAt;
     private String correlationId;
     private String causationId;
     private String issuedBy;
 
-    protected Command(UUID aggregateId, String aggregateType) {
+    protected Command(Long aggregateId, String aggregateType) {
         this.commandId = UUID.randomUUID();
         this.aggregateId = aggregateId;
         this.aggregateType = aggregateType;
@@ -27,7 +27,7 @@ public abstract class Command {
         return commandId;
     }
 
-    public UUID getAggregateId() {
+    public Long getAggregateId() {
         return aggregateId;
     }
 

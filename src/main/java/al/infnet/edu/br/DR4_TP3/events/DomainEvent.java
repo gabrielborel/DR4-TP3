@@ -5,14 +5,14 @@ import java.util.UUID;
 
 public abstract class DomainEvent {
     private final UUID eventId;
-    private final UUID aggregateId;
+    private final Long aggregateId;
     private final String aggregateType;
     private final Instant occurredOn;
     private final long version;
     private String correlationId;
     private String causationId;
 
-    protected DomainEvent(UUID aggregateId, String aggregateType, long version) {
+    protected DomainEvent(Long aggregateId, String aggregateType, long version) {
         this.eventId = UUID.randomUUID();
         this.aggregateId = aggregateId;
         this.aggregateType = aggregateType;
@@ -28,7 +28,7 @@ public abstract class DomainEvent {
         return eventId;
     }
 
-    public UUID getAggregateId() {
+    public Long getAggregateId() {
         return aggregateId;
     }
 

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class PedidoQueryService {
@@ -21,14 +20,14 @@ public class PedidoQueryService {
         this.pedidoRepository = pedidoRepository;
     }
 
-    public List<? extends DomainEvent> buscarEventosPorPedidoId(UUID pedidoId) {
+    public List<? extends DomainEvent> buscarEventosPorPedidoId(Long pedidoId) {
         return eventStore.readEvents(pedidoId.toString())
                 .asStream()
                 .map(event -> (DomainEvent) event.getPayload())
                 .toList();
     }
 
-    public Optional<PedidoEntity> buscarPorId(UUID pedidoId) {
+    public Optional<PedidoEntity> buscarPorId(Long pedidoId) {
         return pedidoRepository.findById(pedidoId);
     }
 }
